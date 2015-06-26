@@ -30,3 +30,10 @@ class ClassBridge
       @remove element, classname
     else
       @add element, classname
+
+
+# export to global namespace
+if expose?
+  expose ClassBridge, 'ClassBridge'
+else
+  window.ClassBridge = ClassBridge

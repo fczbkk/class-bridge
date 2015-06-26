@@ -30,7 +30,7 @@ module.exports = (grunt) ->
     coffee:
       src:
         options:
-          bare: true
+          bare: false
         files:
           'build/class-bridge.js' : 'src/coffee/*.coffee'
       test:

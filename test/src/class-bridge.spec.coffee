@@ -8,8 +8,10 @@ describe 'Class Bridge', ->
     e = document.createElement 'div'
 
 
-  it 'should exist', ->
-    expect(ClassBridge).toBeDefined()
+  describe 'meta', ->
+
+    it 'should exist', ->
+      expect(ClassBridge).toBeDefined()
 
 
   describe 'has', ->
@@ -60,7 +62,7 @@ describe 'Class Bridge', ->
       expect(c.has e, 'aaa').toEqual false
       expect(c.has e, 'bbb').toEqual true
       expect(c.has e, 'ccc').toEqual true
-      
+
 
   describe 'toggle', ->
 
