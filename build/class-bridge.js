@@ -1,45 +1,38 @@
 (function() {
-  var ClassBridge;
+  var ClassBridge, constructRe, root;
 
-  ClassBridge = (function() {
-    function ClassBridge() {}
+  constructRe = function(classname) {
+    return RegExp("(^|\\s)" + classname + "(\\s|$)");
+  };
 
-    ClassBridge.prototype.re = function(classname) {
-      return RegExp("(^|\\s)" + classname + "(\\s|$)");
-    };
-
-    ClassBridge.prototype.has = function(element, classname) {
-      return this.re(classname).test(element.className);
-    };
-
-    ClassBridge.prototype.add = function(element, classname) {
+  ClassBridge = {
+    has: function(element, classname) {
+      return constructRe(classname).test(element.className);
+    },
+    add: function(element, classname) {
       if (!this.has(element, classname)) {
         return element.className += " " + classname;
       }
-    };
-
-    ClassBridge.prototype.remove = function(element, classname) {
+    },
+    remove: function(element, classname) {
       var re;
-      re = this.re(classname);
+      re = constructRe(classname);
       return element.className = element.className.replace(re, ' ');
-    };
-
-    ClassBridge.prototype.toggle = function(element, classname) {
+    },
+    toggle: function(element, classname) {
       if (this.has(element, classname)) {
         return this.remove(element, classname);
       } else {
         return this.add(element, classname);
       }
-    };
-
-    return ClassBridge;
-
-  })();
+    }
+  };
 
   if (typeof expose !== "undefined" && expose !== null) {
     expose(ClassBridge, 'ClassBridge');
   } else {
-    window.ClassBridge = ClassBridge;
+    root = window || global;
+    root.ClassBridge = ClassBridge;
   }
 
 }).call(this);

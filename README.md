@@ -14,30 +14,27 @@ So why should you use Class Bridge instead of polyfill? Two reasons:
 ## Example
 
 ```javascript
-// create instance of ClassBridge object
-var class_bridge = new ClassBridge;
-
 // create testing element
 var element = document.createElement('div');
 element.className = 'aaa bbb'
 
 // check if element contains classname
-class_bridge.has(element, 'aaa'); // true
-class_bridge.has(element, 'ccc'); // false
+ClassBridge.has(element, 'aaa'); // true
+ClassBridge.has(element, 'ccc'); // false
 
 // add classname to element
-class_bridge.add(element, 'ccc');
-class_bridge.has(element, 'ccc'); // true
+ClassBridge.add(element, 'ccc');
+ClassBridge.has(element, 'ccc'); // true
 
 // remove classname from element
-class_bridge.remove(element, 'aaa');
-class_bridge.has(element, 'aaa'); // false
+ClassBridge.remove(element, 'aaa');
+ClassBridge.has(element, 'aaa'); // false
 
 // toggle classname in element
-class_bridge.toggle(element, 'aaa');
-class_bridge.has(element, 'aaa'); // true
-class_bridge.toggle(element, 'aaa');
-class_bridge.has(element, 'aaa'); // false
+ClassBridge.toggle(element, 'aaa');
+ClassBridge.has(element, 'aaa'); // true
+ClassBridge.toggle(element, 'aaa');
+ClassBridge.has(element, 'aaa'); // false
 
 ```
 

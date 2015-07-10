@@ -4,7 +4,7 @@ describe 'Class Bridge', ->
   e = null
 
   beforeEach ->
-    c = new ClassBridge
+    c = ClassBridge
     e = document.createElement 'div'
 
 

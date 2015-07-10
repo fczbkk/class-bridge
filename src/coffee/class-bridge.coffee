@@ -1,17 +1,16 @@
-class ClassBridge
+# generates regex for matching class names separated by whitespace
+constructRe = (classname) ->
+  ///
+    (^|\s)        # beginning of string or whitespace
+    #{classname}
+    (\s|$)        # end of string or whitespace
+  ///
 
 
-  # generates regex for matching class names separated by whitespace
-  re: (classname) ->
-    ///
-      (^|\s)        # beginning of string or whitespace
-      #{classname}
-      (\s|$)        # end of string or whitespace
-    ///
-
+ClassBridge =
 
   has: (element, classname) ->
-    @re classname
+    constructRe classname
       .test element.className
 
 
@@ -21,7 +20,7 @@ class ClassBridge
 
 
   remove: (element, classname) ->
-    re = @re classname
+    re = constructRe classname
     element.className = element.className.replace re, ' '
 
 
@@ -36,4 +35,5 @@ class ClassBridge
 if expose?
   expose ClassBridge, 'ClassBridge'
 else
-  window.ClassBridge = ClassBridge
+  root = window or global
+  root.ClassBridge = ClassBridge
