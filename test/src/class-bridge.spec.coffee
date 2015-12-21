@@ -74,3 +74,12 @@ describe 'Class Bridge', ->
       e.className = 'aaa'
       c.toggle e, 'aaa'
       expect(e.className).not.toContain 'aaa'
+
+    it 'should toggle class based on condition', ->
+      e.className = 'aaa'
+      c.toggle e, 'aaa', true
+      expect(e.className).toContain 'aaa'
+
+      e.className = 'aaa'
+      c.toggle e, 'aaa', false
+      expect(e.className).not.toContain 'aaa'

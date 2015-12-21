@@ -36,6 +36,11 @@ ClassBridge.has(element, 'aaa'); // true
 ClassBridge.toggle(element, 'aaa');
 ClassBridge.has(element, 'aaa'); // false
 
+// toggle adds the classname if optional third parameter is truthy
+ClassBridge.toggle(element, 'aaa', true);
+ClassBridge.has(element, 'aaa'); // true
+ClassBridge.toggle(element, 'aaa', false);
+ClassBridge.has(element, 'aaa'); // false
 ```
 
 ## Bug reports, feature requests and contact

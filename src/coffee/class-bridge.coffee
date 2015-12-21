@@ -24,11 +24,17 @@ ClassBridge =
     element.className = element.className.replace re, ' '
 
 
-  toggle: (element, classname) ->
-    if @has element, classname
-      @remove element, classname
+  toggle: (element, classname, condition) ->
+    if condition?
+      if condition
+        @add element, classname
+      else
+        @remove element, classname
     else
-      @add element, classname
+      if @has element, classname
+        @remove element, classname
+      else
+        @add element, classname
 
 
 # export to global namespace
