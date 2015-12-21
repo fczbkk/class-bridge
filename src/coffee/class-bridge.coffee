@@ -9,22 +9,30 @@ constructRe = (classname) ->
 
 ClassBridge =
 
+
+  _addNamespace: (classname) -> classname
+
+
   has: (element, classname) ->
+    classname = @_addNamespace classname
     constructRe classname
       .test element.className
 
 
   add: (element, classname) ->
+    classname = @_addNamespace classname
     unless @has element, classname
       element.className += " #{classname}"
 
 
   remove: (element, classname) ->
+    classname = @_addNamespace classname
     re = constructRe classname
     element.className = element.className.replace re, ' '
 
 
   toggle: (element, classname, condition) ->
+    classname = @_addNamespace classname
     if condition?
       if condition
         @add element, classname
@@ -35,6 +43,15 @@ ClassBridge =
         @remove element, classname
       else
         @add element, classname
+
+
+  withNamespace: (namespace = '') ->
+    clone = {}
+    for key, val of ClassBridge
+      clone[key] = val
+    delete clone.withNamespace
+    clone._addNamespace = (classname) -> namespace + classname
+    clone
 
 
 # export to global namespace

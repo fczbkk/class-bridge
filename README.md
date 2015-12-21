@@ -41,6 +41,15 @@ ClassBridge.toggle(element, 'aaa', true);
 ClassBridge.has(element, 'aaa'); // true
 ClassBridge.toggle(element, 'aaa', false);
 ClassBridge.has(element, 'aaa'); // false
+
+// if you use namespaced selectors
+var NamespacedClassBridge = ClassBridge.withNamespace('aaa');
+
+element.className = '';
+
+NamespacedClassBridge.add(element, 'bbb');
+ClassBridge.has(element, 'bbb'); // false
+NamespacedClassBrige.has(element, 'bbb'); // true
 ```
 
 ## Bug reports, feature requests and contact

@@ -83,3 +83,20 @@ describe 'Class Bridge', ->
       e.className = 'aaa'
       c.toggle e, 'aaa', false
       expect(e.className).not.toContain 'aaa'
+
+
+  describe 'namespace', ->
+
+    it 'should create namespaced clone', ->
+      result = c.withNamespace 'aaa'
+      expect(typeof result).toEqual 'object'
+
+    it 'should apply namespace to all methods', ->
+      namespaced = c.withNamespace 'aaa'
+      namespaced.add e, 'bbb'
+      expect(e.className).toContain 'aaabbb'
+      expect(namespaced.has e, 'bbb').toEqual true
+      namespaced.remove e, 'bbb'
+      expect(e.className).not.toContain 'aaabbb'
+      namespaced.toggle e, 'bbb'
+      expect(e.className).toContain 'aaabbb'
