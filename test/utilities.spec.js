@@ -1,5 +1,7 @@
 import {
-  parseClassList
+  parseClassList,
+  getElementClassNames,
+  setElementClassNames
 } from './../src/utilities';
 
 describe('parseClassList', function () {
@@ -64,6 +66,40 @@ describe('parseClassList', function () {
     }, 'zzz');
     expect(result.truthy).toEqual(['zzzaaa', 'zzzccc']);
     expect(result.falsy).toEqual(['zzzbbb']);
+  });
+
+});
+
+describe('getElementClassNames', function () {
+
+  it('should return class names of a regular element', function () {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = '<div class="aaa bbb ccc"></div>';
+    const result = getElementClassNames(wrapper.firstChild);
+    expect(result).toEqual(['aaa', 'bbb', 'ccc']);
+  });
+
+  it('should return class names of SVG element', function () {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = '<svg class="aaa bbb ccc"></svg>';
+    const result = getElementClassNames(wrapper.firstChild);
+    expect(result).toEqual(['aaa', 'bbb', 'ccc']);
+  });
+
+});
+
+describe('setElementClassNames', function () {
+
+  it('should set class names of a regular element', function () {
+    const wrapper = document.createElement('div');
+    setElementClassNames(wrapper, ['aaa', 'bbb', 'ccc']);
+    expect(wrapper.getAttribute('class')).toEqual('aaa bbb ccc');
+  });
+
+  it('should set class names of SVG element', function () {
+    const wrapper = document.createElement('svg');
+    setElementClassNames(wrapper, ['aaa', 'bbb', 'ccc']);
+    expect(wrapper.getAttribute('class')).toEqual('aaa bbb ccc');
   });
 
 });

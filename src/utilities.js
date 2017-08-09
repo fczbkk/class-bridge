@@ -103,3 +103,25 @@ export function mergeClasses () {
 export function subtractClasses (element_classes, ref_classes) {
   return element_classes.filter((item) => ref_classes.indexOf(item) === -1);
 }
+
+/**
+ * Gets list of classes of an element.
+ * @param {Element} element
+ * @returns {Array.<string>}
+ */
+export function getElementClassNames (element) {
+  // asking for `element.className` is not a good idea, because it returns
+  // different result for SVG elements
+  return parseString(element.getAttribute('class'));
+}
+
+/**
+ * Sets classes of an element
+ * @param {Element} element
+ * @param {Array.<string>} class_names
+ * @returns {Element}
+ */
+export function setElementClassNames (element, class_names = []) {
+  element.setAttribute('class', class_names.join(' '));
+  return element;
+}

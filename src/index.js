@@ -1,7 +1,8 @@
 import isElement from 'iselement';
 import {
   parseClassList,
-  parseString,
+  getElementClassNames,
+  setElementClassNames,
   mergeClasses,
   subtractClasses
 } from './utilities';
@@ -26,7 +27,7 @@ export default {
    */
   has: function (element, class_names, namespace = this._namespace) {
     if (isElement(element)) {
-      const element_classes = parseString(element.className);
+      const element_classes = getElementClassNames(element);
       const ref_classes = parseClassList(class_names, namespace).truthy;
 
       return ref_classes.reduce((previous, current) => {
@@ -45,7 +46,7 @@ export default {
    */
   hasAny: function (element, class_names, namespace = this._namespace) {
     if (isElement(element)) {
-      const element_classes = parseString(element.className);
+      const element_classes = getElementClassNames(element);
       const ref_classes = parseClassList(class_names, namespace).truthy;
 
       return ref_classes.reduce((previous, current) => {
@@ -63,10 +64,10 @@ export default {
    */
   add: function(element, class_names, namespace = this._namespace) {
     if (isElement(element)) {
-      const element_classes = parseString(element.className);
+      const element_classes = getElementClassNames(element);
       const ref_classes = parseClassList(class_names, namespace).truthy;
       const new_classes = mergeClasses(element_classes, ref_classes);
-      element.className = new_classes.join(' ');
+      setElementClassNames(element, new_classes);
     }
   },
 
@@ -78,10 +79,10 @@ export default {
    */
   remove: function (element, class_names, namespace = this._namespace) {
     if (isElement(element)) {
-      const element_classes = parseString(element.className);
+      const element_classes = getElementClassNames(element);
       const ref_classes = parseClassList(class_names, namespace).truthy;
       const new_classes = subtractClasses(element_classes, ref_classes);
-      element.className = new_classes.join(' ');
+      setElementClassNames(element, new_classes);
     }
   },
 
@@ -93,7 +94,7 @@ export default {
    */
   toggle: function (element, class_names, namespace = this._namespace) {
     if (isElement(element)) {
-      const element_classes = parseString(element.className);
+      const element_classes = getElementClassNames(element);
       const ref_classes = parseClassList(class_names, namespace).truthy;
       const classes_to_add = [];
       const classes_to_remove = [];
@@ -108,7 +109,7 @@ export default {
       let new_classes = mergeClasses(element_classes, classes_to_add);
       new_classes = subtractClasses(new_classes, classes_to_remove);
 
-      element.className = new_classes.join(' ');
+      setElementClassNames(element, new_classes);
     }
   },
 
