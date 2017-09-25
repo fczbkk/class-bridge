@@ -1,3 +1,13 @@
+<a name="3.1.1"></a>
+## [3.1.1](https://github.com/fczbkk/class-bridge/compare/v3.1.0...v3.1.1) (2017-09-25)
+
+
+### Bug Fixes
+
+* do not throw when getting class names of element without class names ([cbfddd6](https://github.com/fczbkk/class-bridge/commit/cbfddd6))
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/fczbkk/class-bridge/compare/v3.0.0...v3.1.0) (2017-08-09)
 
