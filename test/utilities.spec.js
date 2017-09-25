@@ -86,6 +86,19 @@ describe('getElementClassNames', function () {
     expect(result).toEqual(['aaa', 'bbb', 'ccc']);
   });
 
+  it('should return class names element without class names', function () {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = '<div></div>';
+    const result = getElementClassNames(wrapper.firstChild);
+    expect(result).toEqual([]);
+  });
+
+  it('should return class names of freshly created element', function () {
+    const element = document.createElement('div');
+    const result = getElementClassNames(element);
+    expect(result).toEqual([]);
+  });
+
 });
 
 describe('setElementClassNames', function () {

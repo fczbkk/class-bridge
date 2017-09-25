@@ -112,7 +112,7 @@ export function subtractClasses (element_classes, ref_classes) {
 export function getElementClassNames (element) {
   // asking for `element.className` is not a good idea, because it returns
   // different result for SVG elements
-  return parseString(element.getAttribute('class'));
+  return parseString(element.getAttribute('class') || '');
 }
 
 /**
