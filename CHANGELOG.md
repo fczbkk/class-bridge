@@ -1,3 +1,13 @@
+<a name="3.2.1"></a>
+## [3.2.1](https://github.com/fczbkk/class-bridge/compare/v3.2.0...v3.2.1) (2018-01-24)
+
+
+### Bug Fixes
+
+* remove debug ([1b43fb0](https://github.com/fczbkk/class-bridge/commit/1b43fb0))
+
+
+
 <a name="3.2.0"></a>
 # [3.2.0](https://github.com/fczbkk/class-bridge/compare/v3.1.1...v3.2.0) (2018-01-24)
 
