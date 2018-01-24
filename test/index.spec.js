@@ -122,6 +122,13 @@ describe('Class Bridge', function () {
       expect(result).not.toContain('ccc');
     });
 
+    it('should remove classes by regexp', function () {
+      const elm = createElement(['aaabbb', 'cccaaa', 'aaaddd']);
+      ClassBridge.remove(elm, /^aaa/);
+      const result = elm.className.split(/\s+/);
+      expect(result).toEqual(['cccaaa']);
+    });
+
   });
 
   describe('toggle', function () {
@@ -155,6 +162,27 @@ describe('Class Bridge', function () {
       expect(result).not.toContain('aaa');
       expect(result).toContain('bbb');
       expect(result).toContain('ccc');
+    });
+
+  });
+
+  describe('get', function () {
+
+    it('should return empty array on invalid input', function () {
+      expect(ClassBridge.get()).toEqual([]);
+      expect(ClassBridge.get(false)).toEqual([]);
+      expect(ClassBridge.get(null)).toEqual([]);
+      expect(ClassBridge.get('xxx')).toEqual([]);
+    });
+
+    it('should return empty array if there are no class names', function () {
+      const elm = createElement();
+      expect(ClassBridge.get(elm)).toEqual([]);
+    });
+
+    it('should return array of class names', function () {
+      const elm = createElement(['aaa', 'bbb']);
+      expect(ClassBridge.get(elm)).toEqual(['aaa', 'bbb']);
     });
 
   });

@@ -19,6 +19,15 @@ export default {
   _namespace: '',
 
   /**
+   * Returns list of classes of an element. If element has no classes or if input is not an element, returns an empty array.
+   * @param {Element} element
+   * @returns {Array.<string>}
+   */
+  get: function (element) {
+    return getElementClassNames(element);
+  },
+
+  /**
    * Returns true if all class names are present in element.
    * @param {HTMLElement} element
    * @param {ClassList} class_names
@@ -74,13 +83,14 @@ export default {
   /**
    * Removes class names from the element.
    * @param {HTMLElement} element
-   * @param {ClassList} class_names
+   * @param {ClassList|RegExp} class_names
    * @param {string} [namespace]
    */
   remove: function (element, class_names, namespace = this._namespace) {
     if (isElement(element)) {
       const element_classes = getElementClassNames(element);
-      const ref_classes = parseClassList(class_names, namespace).truthy;
+      const ref_classes =
+        parseClassList(class_names, namespace, element_classes).truthy;
       const new_classes = subtractClasses(element_classes, ref_classes);
       setElementClassNames(element, new_classes);
     }

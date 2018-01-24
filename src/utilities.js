@@ -1,3 +1,6 @@
+import isElement from 'iselement';
+
+
 /**
  * Gets unique string items from an array.
  * @param {Array} input
@@ -14,7 +17,7 @@ export function getUnique (input) {
 /**
  * Gets list of unique strings separated by whitespace.
  * @param input
- * @returns {Array}
+ * @returns {Array.<string>}
  * @ignore
  */
 export function parseString (input) {
@@ -55,13 +58,28 @@ export function parseHash (input) {
 }
 
 
+export function parseRegexp (input, class_names) {
+  const result = {truthy: [], falsy: []};
+
+  class_names.forEach((item) => {
+    const target = (input.test(item)) ? result.truthy : result.falsy;
+    target.push(item);
+  });
+
+  console.log('x', input, class_names, result);
+
+  return result;
+}
+
+
 /**
  * Attempts to extract list of class names from input
  * @param {*} [input]
  * @param {string} [namespace] String to be added to the beginning of every item in result.
+ * @param {Array.<string>} [class_names] Class names against which some parsers (e.g. RegExp) will be executed.
  * @returns {{truthy: Array, falsy: Array}} Lists of class names evaluated as truthy and falsy.
  */
-export function parseClassList (input, namespace) {
+export function parseClassList (input, namespace, class_names = []) {
   let result = {
     truthy: [],
     falsy: []
@@ -71,6 +89,9 @@ export function parseClassList (input, namespace) {
     result.truthy = parseString(input);
   } else if (Array.isArray(input)) {
     result.truthy = parseArray(input);
+  } else if (input instanceof RegExp) {
+    // this check must be before "object", because RegExp is Object
+    result = parseRegexp(input, class_names);
   } else if (typeof input === 'object') {
     result = parseHash(input);
   }
@@ -112,7 +133,10 @@ export function subtractClasses (element_classes, ref_classes) {
 export function getElementClassNames (element) {
   // asking for `element.className` is not a good idea, because it returns
   // different result for SVG elements
-  return parseString(element.getAttribute('class') || '');
+  if (isElement(element)) {
+    return parseString(element.getAttribute('class') || '');
+  }
+  return [];
 }
 
 /**
