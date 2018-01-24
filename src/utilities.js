@@ -66,8 +66,6 @@ export function parseRegexp (input, class_names) {
     target.push(item);
   });
 
-  console.log('x', input, class_names, result);
-
   return result;
 }
 
